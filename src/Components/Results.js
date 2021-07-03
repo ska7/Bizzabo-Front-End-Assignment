@@ -2,17 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ResultItem } from './ResultItem';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => createStyles({
   tableContainer: {
-    margin: '100px 0px',
+    margin: '50px 0px',
     width: '80vw',
     display: 'flex',
     justifyContent: 'center',
+  },
+  table: {
+    width: '100%',
   },
   tableHead: {
     background: 'grey',
@@ -36,39 +39,46 @@ const useStyles = makeStyles({
     color: 'white',
     fontWeight: 'bold',
   },
-  table: {
-    width: '100%',
-  },
+
   tableBody: {
 
   },
-
-});
+  noResultsMessage: {
+    ...theme.defaultMessage,
+  },
+}));
 
 // This is a Presentational component dedicated to displaying results fetched in the ResultsContainer.js
 export const Results = ({ repositories, repositoriesCount }) => {
   const classes = useStyles();
   return (
-    <TableContainer component={Paper} className={classes.tableContainer}>
-      <Table className={classes.table} size="medium" aria-label="a dense table">
-        <TableHead className={classes.tableHead}>
-          <TableRow>
-            <TableCell className={`${classes.tableCell} ${classes.tableCellHeader}`}>
-              Found
-              {' '}
-              {repositoriesCount}
-              {' '}
-              repositories
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {repositories.map((row) => (
-            <ResultItem key={row.full_name} repository={row} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      {
+      repositories.length ? (
+        <TableContainer component={Paper} className={classes.tableContainer}>
+          <Table className={classes.table} size="medium" aria-label="a dense table">
+            <TableHead className={classes.tableHead}>
+              <TableRow>
+                <TableCell className={`${classes.tableCell} ${classes.tableCellHeader}`}>
+                  Found
+                  {' '}
+                  {repositoriesCount}
+                  {' '}
+                  repositories
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {repositories.map((row) => (
+                <ResultItem key={row.full_name} repository={row} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : <Typography className={classes.noResultsMessage}>No repositories found, please try to adjust your request</Typography>
+    }
+
+    </>
   );
 };
 

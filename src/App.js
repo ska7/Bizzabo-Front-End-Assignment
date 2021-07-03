@@ -1,21 +1,30 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Search } from './Components/Search';
 import { ResultsContainer } from './Components/ResultsContainer';
 
+const useStyles = makeStyles((theme) => createStyles({
+  defaultMessage: {
+    ...theme.defaultMessage,
+  },
+}));
+
 const App = () => {
   const [searchString, setSearchString] = useState('');
-  const [activePage, setActivePage] = useState(1);
 
   useEffect(() => {
   }, [searchString]);
 
+  const classes = useStyles();
+
   return (
     <Grid className="App">
       <Search setSearchString={setSearchString} />
-      <ResultsContainer page={activePage} searchQuery={searchString} resultsPerPage={6} />
+      {searchString.length >= 2 ? <ResultsContainer searchQuery={searchString} resultsPerPage={6} />
+        : <Typography className={classes.defaultMessage}>Start your search!</Typography>}
     </Grid>
   );
 };

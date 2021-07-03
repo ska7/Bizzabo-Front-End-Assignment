@@ -18,5 +18,6 @@ module.exports = {
     'react/require-default-props': 0,
     'no-unused-vars': 0,
     'max-len': 0,
+    'no-plusplus': 0,
   },
 };

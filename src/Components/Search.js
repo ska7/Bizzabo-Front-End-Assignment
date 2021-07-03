@@ -15,7 +15,14 @@ export const Search = ({ setSearchString }) => {
   const classes = useStyles();
 
   return (
-    <TextField onChange={(e) => setSearchString(e.target.value)} className={classes.input} id="outlined-basic" label="Type in a repo name" variant="outlined" />
+    <TextField
+      onChange={(e) => setSearchString(e.target.value)}
+      color="secondary"
+      className={classes.input}
+      id="outlined-basic"
+      label="Type in a repo name"
+      variant="outlined"
+    />
   );
 };
 
