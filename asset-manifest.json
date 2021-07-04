@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/Bizzabo-Front-End-Assignment/static/css/main.e5b0d1e6.chunk.css",
-    "main.js": "/Bizzabo-Front-End-Assignment/static/js/main.c2f45455.chunk.js",
-    "main.js.map": "/Bizzabo-Front-End-Assignment/static/js/main.c2f45455.chunk.js.map",
+    "main.js": "/Bizzabo-Front-End-Assignment/static/js/main.c002ec63.chunk.js",
+    "main.js.map": "/Bizzabo-Front-End-Assignment/static/js/main.c002ec63.chunk.js.map",
     "runtime-main.js": "/Bizzabo-Front-End-Assignment/static/js/runtime-main.d121e220.js",
     "runtime-main.js.map": "/Bizzabo-Front-End-Assignment/static/js/runtime-main.d121e220.js.map",
-    "static/js/2.77eabdfc.chunk.js": "/Bizzabo-Front-End-Assignment/static/js/2.77eabdfc.chunk.js",
-    "static/js/2.77eabdfc.chunk.js.map": "/Bizzabo-Front-End-Assignment/static/js/2.77eabdfc.chunk.js.map",
+    "static/js/2.fe46691f.chunk.js": "/Bizzabo-Front-End-Assignment/static/js/2.fe46691f.chunk.js",
+    "static/js/2.fe46691f.chunk.js.map": "/Bizzabo-Front-End-Assignment/static/js/2.fe46691f.chunk.js.map",
     "static/js/3.3e19289c.chunk.js": "/Bizzabo-Front-End-Assignment/static/js/3.3e19289c.chunk.js",
     "static/js/3.3e19289c.chunk.js.map": "/Bizzabo-Front-End-Assignment/static/js/3.3e19289c.chunk.js.map",
     "index.html": "/Bizzabo-Front-End-Assignment/index.html",
     "static/css/main.e5b0d1e6.chunk.css.map": "/Bizzabo-Front-End-Assignment/static/css/main.e5b0d1e6.chunk.css.map",
-    "static/js/2.77eabdfc.chunk.js.LICENSE.txt": "/Bizzabo-Front-End-Assignment/static/js/2.77eabdfc.chunk.js.LICENSE.txt"
+    "static/js/2.fe46691f.chunk.js.LICENSE.txt": "/Bizzabo-Front-End-Assignment/static/js/2.fe46691f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d121e220.js",
-    "static/js/2.77eabdfc.chunk.js",
+    "static/js/2.fe46691f.chunk.js",
     "static/css/main.e5b0d1e6.chunk.css",
-    "static/js/main.c2f45455.chunk.js"
+    "static/js/main.c002ec63.chunk.js"
   ]
 }
