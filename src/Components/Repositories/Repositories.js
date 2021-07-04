@@ -48,32 +48,27 @@ export const Repositories = ({ repositories, repositoriesCount }) => {
   const classes = useStyles();
   return (
     <>
-      {
-      repositories.length
-        ? (
-          <TableContainer component={Paper} className={classes.tableContainer}>
-            <Table className={classes.table} size="medium" aria-label="a dense table">
-              <TableHead className={classes.tableHead}>
-                <TableRow>
-                  <TableCell className={`${classes.tableCell} ${classes.tableCellHeader}`}>
-                    Found
-                    {' '}
-                    {repositoriesCount}
-                    {' '}
-                    repositories
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody className={classes.tableBody}>
-                {repositories.map((row) => (
-                  <ResultItem key={row.full_name} repository={row} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        ) : <Typography className={classes.noResultsMessage}>No repositories found, try to adjust your request</Typography>
-    }
-
+      <TableContainer component={Paper} className={classes.tableContainer}>
+        <Table className={classes.table} size="medium" aria-label="a dense table">
+          <TableHead className={classes.tableHead}>
+            <TableRow>
+              <TableCell className={`${classes.tableCell} ${classes.tableCellHeader}`}>
+                Found
+                {' '}
+                {repositoriesCount}
+                {' '}
+                repositories
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody className={classes.tableBody}>
+            {repositories.map((row) => (
+              <ResultItem key={row.full_name} repository={row} />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {!repositories.length ? <Typography className={classes.noResultsMessage}>No repositories found, try to adjust your request</Typography> : null}
     </>
   );
 };

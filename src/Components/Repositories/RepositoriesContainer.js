@@ -29,6 +29,7 @@ export const RepositoriesContainer = ({ searchQuery, resultsPerPage }) => {
       // If we catch some error, we throw an alert with its message
       .catch((e) => alert(e.message))
       .finally(() => setLoading(false));
+    // useEffect hook will re-run every time either the search query or the active page is updated
   }, [searchQuery, activePage]);
   return (
     <>
