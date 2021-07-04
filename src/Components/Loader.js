@@ -14,7 +14,9 @@ const customStyles = makeStyles({
   loader: {
     top: 0,
     bottom: 0,
-    margin: 'auto 0px',
+    left: 0,
+    right: 0,
+    margin: 'auto auto',
     position: 'absolute',
     animation: '$spin 1s forwards linear infinite',
     height: '150px',

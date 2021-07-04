@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Grid } from '@material-ui/core';
 import { PaginationItem } from './PaginationItem';
+import { Pagination } from './Pagination';
 
 const renderPaginationItems = (activePage, totalPageCount, callback) => {
   const pages = [];
 
   if (totalPageCount > 7) {
     if (activePage >= 5) {
+      // If active page is > 5, it should always be centered in the pagination block
+      // with following and previous page tiles rendered sideways
+      //  Active page = 8, pages = [5,6,7,8,9,10,11]
+      //  Active page = 9, pages = [6,7,8,9,10,11,12]
       for (let page = activePage - 3; page < activePage + 4; page++) {
         pages.push(<PaginationItem pageNumber={page} activePage={activePage} setActivePage={callback} />);
       }
     } else {
+      // If active page is < 5, pages = [1,2,3,4,5,6,7]
       for (let page = 1; page < 8; page++) {
         pages.push(<PaginationItem pageNumber={page} activePage={activePage} setActivePage={callback} />);
       }
     }
   } else {
-    for (let page = 0; page < totalPageCount; page++) {
+    // If total page count is < 7, all available page tiles should render at once
+    for (let page = 1; page < totalPageCount; page++) {
       pages.push(<PaginationItem pageNumber={page} activePage={activePage} setActivePage={callback} />);
     }
   }
@@ -26,7 +32,9 @@ const renderPaginationItems = (activePage, totalPageCount, callback) => {
   return pages;
 };
 
-export const Pagination = ({ activePage, setActivePage, totalPageCount }) => {
+// This is a Container component dedicated to holding the logic of how page tiles
+// are generated that should be displayed in Pagination.js
+export const PaginationContainer = ({ activePage, setActivePage, totalPageCount }) => {
   const [pages, setPages] = useState([]);
 
   useEffect(() => {
@@ -34,15 +42,11 @@ export const Pagination = ({ activePage, setActivePage, totalPageCount }) => {
   }, [activePage]);
 
   return (
-    <Grid>
-      {activePage === 1 ? null : <Button onClick={() => setActivePage(activePage - 1)}>Prev</Button>}
-      {pages.map((page) => page)}
-      <Button onClick={() => setActivePage(activePage + 1)}>Next</Button>
-    </Grid>
+    <Pagination activePage={activePage} pages={pages} setActivePage={setActivePage} totalPageCount={totalPageCount} />
   );
 };
 
-Pagination.propTypes = {
+PaginationContainer.propTypes = {
   activePage: PropTypes.number.isRequired,
   setActivePage: PropTypes.func.isRequired,
   totalPageCount: PropTypes.number.isRequired,

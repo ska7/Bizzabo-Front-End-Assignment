@@ -9,7 +9,24 @@ import StarIcon from '@material-ui/icons/Star';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
+  link: {
+    height: '75px',
+    width: '100%',
+    display: 'flex',
+    textDecoration: 'none',
+    color: 'black',
+    padding: 0,
+    margin: 0,
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
   tableRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
     width: '100%',
     borderBottom: '1px solid rgba(224, 224, 224, 1)',
     '&:hover': {
@@ -25,17 +42,6 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  link: {
-    width: '100%',
-    textDecoration: 'none',
-    color: 'black',
-    padding: 0,
-    margin: 0,
-    display: 'flex',
-    '&:hover': {
-      textDecoration: 'none',
-    },
   },
   repositoryName: {
     width: '50%',

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Search } from './Components/Search';
-import { ResultsContainer } from './Components/ResultsContainer';
+import { ResultsContainer } from './Components/Repositories/ResultsContainer';
 
 const useStyles = makeStyles((theme) => createStyles({
   defaultMessage: {

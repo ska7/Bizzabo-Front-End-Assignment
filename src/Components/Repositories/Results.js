@@ -9,12 +9,14 @@ import { ResultItem } from './ResultItem';
 
 const useStyles = makeStyles((theme) => createStyles({
   tableContainer: {
+    // height: '60vh',
     margin: '50px 0px',
     width: '80vw',
     display: 'flex',
     justifyContent: 'center',
   },
   table: {
+    height: '100%',
     width: '100%',
   },
   tableHead: {
@@ -23,13 +25,6 @@ const useStyles = makeStyles((theme) => createStyles({
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
-  },
-  tableRow: {
-    width: '100%',
-    borderBottom: '1px solid rgba(224, 224, 224, 1)',
-    '&:hover': {
-      cursor: 'pointer',
-    },
   },
   tableCell: {
     width: '100%',
@@ -41,7 +36,7 @@ const useStyles = makeStyles((theme) => createStyles({
   },
 
   tableBody: {
-
+    height: 'auto',
   },
   noResultsMessage: {
     ...theme.defaultMessage,
@@ -68,7 +63,7 @@ export const Results = ({ repositories, repositoriesCount }) => {
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className={classes.tableBody}>
               {repositories.map((row) => (
                 <ResultItem key={row.full_name} repository={row} />
               ))}

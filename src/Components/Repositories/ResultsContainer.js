@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { Grid } from '@material-ui/core';
 import { Results } from './Results';
-import { Pagination } from './Pagination';
-import { Loader } from './Loader';
+import { PaginationContainer } from '../Pagination/PaginationContainer';
+import { Loader } from '../Loader';
 
 const getResults = (searchString, page, resultsPerPage = 6) => {
   const headers = {
@@ -12,7 +13,8 @@ const getResults = (searchString, page, resultsPerPage = 6) => {
   return axios.get(`https://api.github.com/search/repositories?q=${searchString}&per_page=${resultsPerPage}&page=${page}`, { headers });
 };
 
-// This is a Container component dedicated to holding the logic for fetching results that should be rendered in Results.js
+// This is a Container component dedicated to holding the logic of
+// fetching results that should be rendered in Results.js
 export const ResultsContainer = ({ searchQuery, resultsPerPage }) => {
   const [activePage, setActivePage] = useState(1);
   const [results, setResults] = useState([]);
@@ -35,10 +37,14 @@ export const ResultsContainer = ({ searchQuery, resultsPerPage }) => {
   }, [searchQuery, activePage]);
   return (
     <>
-      {isLoading ? <Loader /> : <Results repositories={results} repositoriesCount={totalResultsCount} />}
+      {isLoading ? (
+        <Grid style={{}}>
+          <Loader />
+        </Grid>
+      ) : <Results repositories={results} repositoriesCount={totalResultsCount} />}
       {/* We want to display the pagination block only if the total number of results
        is greater than the number of results displayed at once  */}
-      {totalResultsCount > resultsPerPage ? <Pagination totalPageCount={totalPageCount} activePage={activePage} setActivePage={setActivePage} /> : null}
+      {totalResultsCount > resultsPerPage ? <PaginationContainer totalPageCount={totalPageCount} activePage={activePage} setActivePage={setActivePage} /> : null}
 
     </>
   );
