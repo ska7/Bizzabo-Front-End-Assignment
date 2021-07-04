@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { PaginationItem } from './PaginationItem';
 import { Pagination } from './Pagination';
 
-const renderPaginationItems = (activePage, totalPageCount, callback) => {
+const renderPaginationItems = (activePage, totalPageCount) => {
   const pages = [];
 
   if (totalPageCount > 7) {
@@ -14,18 +14,18 @@ const renderPaginationItems = (activePage, totalPageCount, callback) => {
       //  Active page = 8, pages = [5,6,7,8,9,10,11]
       //  Active page = 9, pages = [6,7,8,9,10,11,12]
       for (let page = activePage - 3; page < activePage + 4; page++) {
-        pages.push(<PaginationItem pageNumber={page} activePage={activePage} setActivePage={callback} />);
+        pages.push(page);
       }
     } else {
       // If active page is < 5, pages = [1,2,3,4,5,6,7]
       for (let page = 1; page < 8; page++) {
-        pages.push(<PaginationItem pageNumber={page} activePage={activePage} setActivePage={callback} />);
+        pages.push(page);
       }
     }
   } else {
     // If total page count is < 7, all available page tiles should render at once
     for (let page = 1; page < totalPageCount; page++) {
-      pages.push(<PaginationItem pageNumber={page} activePage={activePage} setActivePage={callback} />);
+      pages.push(page);
     }
   }
 
@@ -38,7 +38,7 @@ export const PaginationContainer = ({ activePage, setActivePage, totalPageCount 
   const [pages, setPages] = useState([]);
 
   useEffect(() => {
-    setPages(renderPaginationItems(activePage, totalPageCount, setActivePage));
+    setPages(renderPaginationItems(activePage, totalPageCount));
   }, [activePage]);
 
   return (

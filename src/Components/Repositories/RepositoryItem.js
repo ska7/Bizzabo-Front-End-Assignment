@@ -9,24 +9,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { RepositoryStats } from './RepositoryStats';
 
 const useStyles = makeStyles({
-  link: {
-    height: '75px',
-    width: '100%',
-    display: 'flex',
-    textDecoration: 'none',
-    color: 'black',
-    padding: 0,
-    margin: 0,
-    '&:hover': {
-      textDecoration: 'none',
-    },
-  },
   tableRow: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100%',
+    height: '75px',
     width: '100%',
     borderBottom: '1px solid rgba(224, 224, 224, 1)',
     '&:hover': {
@@ -47,6 +35,17 @@ const useStyles = makeStyles({
     width: '50%',
     paddingLeft: '25px',
   },
+  link: {
+    width: '100%',
+    display: 'flex',
+    textDecoration: 'none',
+    color: 'black',
+    padding: 0,
+    margin: 0,
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
 
 });
 
@@ -54,14 +53,14 @@ export const ResultItem = ({ repository }) => {
   const classes = useStyles();
 
   return (
-    <Link key={repository.full_name} className={classes.link} href={repository.html_url} target="_blank" rel="noreferrer noopener">
-      <TableRow hover className={classes.tableRow}>
-        <TableCell component="th" scope="row" className={classes.tableCell}>
+    <TableRow hover className={classes.tableRow} key={repository.html_url}>
+      <TableCell component="th" scope="row" className={classes.tableCell}>
+        <Link href={repository.html_url} className={classes.link} target="_blank" rel="noreferrer noopener">
           <Typography className={classes.repositoryName}>{repository.full_name}</Typography>
           <RepositoryStats forks={repository.forks} stars={repository.stargazers_count} />
-        </TableCell>
-      </TableRow>
-    </Link>
+        </Link>
+      </TableCell>
+    </TableRow>
   );
 };
 

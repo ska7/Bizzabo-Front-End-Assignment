@@ -16,6 +16,7 @@ export const RepositoriesContainer = ({ searchQuery, resultsPerPage }) => {
   const [totalRepositoriesCount, setTotalRepositoriesCount] = useState(0);
   const [totalPageCount, setTotalPageCount] = useState(0);
 
+  /* eslint-disable no-alert */
   useEffect(() => {
     setLoading(true);
     getRepositories(searchQuery, activePage, resultsPerPage)
@@ -25,8 +26,8 @@ export const RepositoriesContainer = ({ searchQuery, resultsPerPage }) => {
         setTotalPageCount(data.total_count / resultsPerPage);
         setTotalRepositoriesCount(data.total_count);
       })
-      // If we catch some error, its message should be displayed in the Repositories component.
-      .catch((e) => console.log(e.message))
+      // If we catch some error, we throw an alert with its message
+      .catch((e) => alert(e.message))
       .finally(() => setLoading(false));
   }, [searchQuery, activePage]);
   return (

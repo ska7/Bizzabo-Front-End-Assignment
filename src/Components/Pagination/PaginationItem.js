@@ -33,7 +33,6 @@ export const PaginationItem = ({ pageNumber, activePage, setActivePage }) => {
       disableFocusRipple
       className={`${classes.page} ${pageNumber === activePage && classes.active}`}
       onClick={() => setActivePage(pageNumber)}
-      key={`page-item-${pageNumber}`}
     >
       {pageNumber}
     </Button>

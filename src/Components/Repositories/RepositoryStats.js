@@ -60,8 +60,8 @@ export const RepositoryStats = ({ forks, stars }) => {
   const classes = useStyles();
   return (
     <Grid className={classes.repositoryInfoGrid}>
-      <Typography item className={classes.aligntTextRight}>{formatNumber(forks)}</Typography>
-      <Icon item className={classes.icon}>
+      <Typography className={classes.aligntTextRight}>{formatNumber(forks)}</Typography>
+      <Icon className={classes.icon}>
         <RestaurantIcon fontSize="small" />
       </Icon>
       <Icon className={classes.icon}>
