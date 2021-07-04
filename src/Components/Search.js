@@ -36,6 +36,7 @@ export const Search = ({ setSearchString }) => {
       id="outlined-basic"
       label="Type in a repo name"
       variant="outlined"
+      autoComplete={false}
     />
   );
 };

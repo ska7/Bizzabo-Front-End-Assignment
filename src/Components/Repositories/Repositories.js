@@ -5,7 +5,7 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography,
 } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ResultItem } from './ResultItem';
+import { ResultItem } from './RepositoryItem';
 
 const useStyles = makeStyles((theme) => createStyles({
   tableContainer: {
@@ -44,40 +44,41 @@ const useStyles = makeStyles((theme) => createStyles({
 }));
 
 // This is a Presentational component dedicated to displaying results fetched in the ResultsContainer.js
-export const Results = ({ repositories, repositoriesCount }) => {
+export const Repositories = ({ repositories, repositoriesCount }) => {
   const classes = useStyles();
   return (
     <>
       {
-      repositories.length ? (
-        <TableContainer component={Paper} className={classes.tableContainer}>
-          <Table className={classes.table} size="medium" aria-label="a dense table">
-            <TableHead className={classes.tableHead}>
-              <TableRow>
-                <TableCell className={`${classes.tableCell} ${classes.tableCellHeader}`}>
-                  Found
-                  {' '}
-                  {repositoriesCount}
-                  {' '}
-                  repositories
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody className={classes.tableBody}>
-              {repositories.map((row) => (
-                <ResultItem key={row.full_name} repository={row} />
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      ) : <Typography className={classes.noResultsMessage}>No repositories found, please try to adjust your request</Typography>
+      repositories.length
+        ? (
+          <TableContainer component={Paper} className={classes.tableContainer}>
+            <Table className={classes.table} size="medium" aria-label="a dense table">
+              <TableHead className={classes.tableHead}>
+                <TableRow>
+                  <TableCell className={`${classes.tableCell} ${classes.tableCellHeader}`}>
+                    Found
+                    {' '}
+                    {repositoriesCount}
+                    {' '}
+                    repositories
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody className={classes.tableBody}>
+                {repositories.map((row) => (
+                  <ResultItem key={row.full_name} repository={row} />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        ) : <Typography className={classes.noResultsMessage}>No repositories found, try to adjust your request</Typography>
     }
 
     </>
   );
 };
 
-Results.propTypes = {
+Repositories.propTypes = {
   repositories: PropTypes.arrayOf(PropTypes.object),
   repositoriesCount: PropTypes.number,
 };

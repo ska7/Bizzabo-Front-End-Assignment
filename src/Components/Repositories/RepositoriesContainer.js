@@ -1,42 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Results } from './Results';
+import { Repositories } from './Repositories';
 import { PaginationContainer } from '../Pagination/PaginationContainer';
 import { Loader } from '../Loader';
 
-const getResults = (searchString, page, resultsPerPage = 6) => axios.get(`https://api.github.com/search/repositories?q=${searchString}&per_page=${resultsPerPage}&page=${page}`);
+const getRepositories = (searchString, page, resultsPerPage = 6) => axios.get(`https://api.github.com/search/repositories?q=${searchString}&per_page=${resultsPerPage}&page=${page}`);
 
 // This is a Container component dedicated to holding the logic of
 // fetching results that should be rendered in Results.js
-export const ResultsContainer = ({ searchQuery, resultsPerPage }) => {
+export const RepositoriesContainer = ({ searchQuery, resultsPerPage }) => {
   const [activePage, setActivePage] = useState(1);
-  const [results, setResults] = useState([]);
-  const [isLoading, setLoading] = useState(false);
-  const [totalResultsCount, setTotalResultsCount] = useState(0);
+  const [repositories, setRepositories] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const [totalRepositoriesCount, setTotalRepositoriesCount] = useState(0);
   const [totalPageCount, setTotalPageCount] = useState(0);
 
   useEffect(() => {
     setLoading(true);
-    getResults(searchQuery, activePage, resultsPerPage)
+    getRepositories(searchQuery, activePage, resultsPerPage)
       .then(({ data }) => {
-        setResults(data.items);
-        setTotalPageCount(data.total_count / resultsPerPage);
-        setTotalResultsCount(data.total_count);
-
+        setRepositories(data.items);
         // To learn how many pages the app could possibly render for this query, we divide the total number of results by resultsPerPage.
+        setTotalPageCount(data.total_count / resultsPerPage);
+        setTotalRepositoriesCount(data.total_count);
       })
-      .catch((e) => new Error(e))
+      // If we catch some error, its message should be displayed in the Repositories component.
+      .catch((e) => console.log(e.message))
       .finally(() => setLoading(false));
   }, [searchQuery, activePage]);
   return (
     <>
       {isLoading ? (
         <Loader />
-      ) : <Results repositories={results} repositoriesCount={totalResultsCount} />}
+      ) : <Repositories repositories={repositories} repositoriesCount={totalRepositoriesCount} />}
       {/* We want to display the pagination block only if the total number of results
        is greater than the number of results displayed at once  */}
-      {totalResultsCount > resultsPerPage ? (
+      {totalRepositoriesCount > resultsPerPage ? (
         <PaginationContainer
           totalPageCount={totalPageCount}
           activePage={activePage}
@@ -48,7 +48,7 @@ export const ResultsContainer = ({ searchQuery, resultsPerPage }) => {
   );
 };
 
-ResultsContainer.propTypes = {
+RepositoriesContainer.propTypes = {
   searchQuery: PropTypes.string.isRequired,
   resultsPerPage: PropTypes.number,
 };

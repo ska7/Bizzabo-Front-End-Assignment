@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Search } from './Components/Search';
-import { ResultsContainer } from './Components/Repositories/ResultsContainer';
+import { RepositoriesContainer } from './Components/Repositories/RepositoriesContainer';
 
 const useStyles = makeStyles((theme) => createStyles({
   defaultMessage: {
@@ -23,7 +23,8 @@ const App = () => {
   return (
     <Grid className="App">
       <Search setSearchString={setSearchString} />
-      {searchString.length >= 2 ? <ResultsContainer searchQuery={searchString} resultsPerPage={6} />
+      {/* We pass the search string to the RepositoriesContainer component only if it's at least 2 characters long */}
+      {searchString.length >= 2 ? <RepositoriesContainer searchQuery={searchString} resultsPerPage={6} />
         : <Typography className={classes.defaultMessage}>Start your search!</Typography>}
     </Grid>
   );

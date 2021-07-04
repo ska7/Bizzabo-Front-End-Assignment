@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme) => createStyles({
   },
   page: {
     height: '50px',
-    width: '50px',
+    minWidth: '50px',
     padding: 0,
-    margin: 0,
+    margin: '0px 10px',
   },
 }));
 

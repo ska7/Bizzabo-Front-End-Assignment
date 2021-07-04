@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   paginationBlock: {
     position: 'absolute',
-    bottom: '50px',
+    bottom: '30px',
   },
   hidden: {
     visibility: 'hidden',
