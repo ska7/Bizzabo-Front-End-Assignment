@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
-  TableCell, TableRow, Link, Typography, Grid, Icon,
+  TableCell, TableRow, Link, Typography,
 } from '@material-ui/core';
-import RestaurantIcon from '@material-ui/icons/Restaurant';
-import StarIcon from '@material-ui/icons/Star';
+
 import { makeStyles } from '@material-ui/core/styles';
+import { RepositoryStats } from './RepositoryStats';
 
 const useStyles = makeStyles({
   link: {
@@ -47,54 +47,8 @@ const useStyles = makeStyles({
     width: '50%',
     paddingLeft: '25px',
   },
-  repositoryInfoGrid: {
-    width: '50%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  icon: {
-    display: 'flex',
-    justifyContent: 'center',
-    padding: '0px 10px',
-  },
-  aligntTextRight: {
-    textAlign: 'right',
-    width: '50%',
-  },
+
 });
-
-const formatNumber = (num) => {
-  // 1 000 000 000 = 10 digits
-
-  // if num is greater or equal to 1b, return "more than 1 billion" string
-  if (num.toString().length >= 10) {
-    return '> 1b';
-  }
-  // if num is smaller or equal to 999, return the number converted to string
-  if (num.toString().length < 4) {
-    return num.toString();
-  }
-
-  // for thousands
-  if (num.toString().length > 3 && num.toString().length <= 6) {
-    const wholePart = num.toString().slice(0, -3);
-    const fractionalPart = num.toString().slice(-3);
-
-    return `${parseFloat(`${wholePart}.${fractionalPart}`).toFixed()}k`;
-  }
-
-  // for millions
-  if (num.toString().length >= 7 && num.toString().length < 10) {
-    const wholePart = num.toString().slice(0, -6);
-    const fractionalPart = num.toString().slice(-6);
-
-    return `${parseFloat(`${wholePart}.${fractionalPart}`).toFixed()}m`;
-  }
-
-  return num;
-};
 
 export const ResultItem = ({ repository }) => {
   const classes = useStyles();
@@ -104,16 +58,7 @@ export const ResultItem = ({ repository }) => {
       <TableRow hover className={classes.tableRow}>
         <TableCell component="th" scope="row" className={classes.tableCell}>
           <Typography className={classes.repositoryName}>{repository.full_name}</Typography>
-          <Grid className={classes.repositoryInfoGrid}>
-              <Typography item className={classes.aligntTextRight}>{formatNumber(repository.forks)}</Typography> {/* eslint-disable-line */}
-            <Icon item className={classes.icon}>
-              <RestaurantIcon fontSize="small" />
-            </Icon>
-            <Icon className={classes.icon}>
-              <StarIcon fontSize="small" />
-            </Icon>
-            <Typography>{formatNumber(repository.stargazers_count)}</Typography> {/* eslint-disable-line */}
-          </Grid>
+          <RepositoryStats forks={repository.forks} stars={repository.stargazers_count} />
         </TableCell>
       </TableRow>
     </Link>
