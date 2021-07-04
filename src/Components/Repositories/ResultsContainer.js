@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Grid } from '@material-ui/core';
 import { Results } from './Results';
 import { PaginationContainer } from '../Pagination/PaginationContainer';
 import { Loader } from '../Loader';
 
-const getResults = (searchString, page, resultsPerPage = 6) => {
-  const headers = {
-    Authorization: `token ${process.env.REACT_APP_GITHUB_PRIVATE_TOKEN}`,
-  };
-  return axios.get(`https://api.github.com/search/repositories?q=${searchString}&per_page=${resultsPerPage}&page=${page}`, { headers });
-};
+const getResults = (searchString, page, resultsPerPage = 6) => axios.get(`https://api.github.com/search/repositories?q=${searchString}&per_page=${resultsPerPage}&page=${page}`);
 
 // This is a Container component dedicated to holding the logic of
 // fetching results that should be rendered in Results.js
