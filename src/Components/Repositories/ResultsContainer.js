@@ -26,25 +26,29 @@ export const ResultsContainer = ({ searchQuery, resultsPerPage }) => {
     setLoading(true);
     getResults(searchQuery, activePage, resultsPerPage)
       .then(({ data }) => {
+        setResults(data.items);
         setTotalPageCount(data.total_count / resultsPerPage);
         setTotalResultsCount(data.total_count);
-        setResults(data.items);
 
         // To learn how many pages the app could possibly render for this query, we divide the total number of results by resultsPerPage.
       })
-      .catch((e) => console.log(e))
+      .catch((e) => new Error(e))
       .finally(() => setLoading(false));
   }, [searchQuery, activePage]);
   return (
     <>
       {isLoading ? (
-        <Grid style={{}}>
-          <Loader />
-        </Grid>
+        <Loader />
       ) : <Results repositories={results} repositoriesCount={totalResultsCount} />}
       {/* We want to display the pagination block only if the total number of results
        is greater than the number of results displayed at once  */}
-      {totalResultsCount > resultsPerPage ? <PaginationContainer totalPageCount={totalPageCount} activePage={activePage} setActivePage={setActivePage} /> : null}
+      {totalResultsCount > resultsPerPage ? (
+        <PaginationContainer
+          totalPageCount={totalPageCount}
+          activePage={activePage}
+          setActivePage={setActivePage}
+        />
+      ) : null}
 
     </>
   );
