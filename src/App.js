@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import { Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
@@ -14,9 +14,6 @@ const useStyles = makeStyles((theme) => createStyles({
 
 const App = () => {
   const [searchString, setSearchString] = useState('');
-
-  useEffect(() => {
-  }, [searchString]);
 
   const classes = useStyles();
 
