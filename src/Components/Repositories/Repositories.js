@@ -57,7 +57,7 @@ export const Repositories = ({ repositories, repositoriesCount }) => {
                 {' '}
                 {repositoriesCount}
                 {' '}
-                repositories
+                {repositoriesCount === 1 ? 'repository' : 'repositories'}
               </TableCell>
             </TableRow>
           </TableHead>
