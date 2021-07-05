@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
 
@@ -13,8 +13,6 @@ const useStyles = makeStyles({
 });
 
 export const Search = ({ setSearchString }) => {
-  const classes = useStyles();
-
   const handleChange = (e) => setSearchString(e.target.value);
   // To avoid excessive number of requests to the Github API,
   // we update the search string half a second later after the last keyboard stroke
@@ -29,6 +27,9 @@ export const Search = ({ setSearchString }) => {
       debouncedHandleChange.cancel();
     };
   }, []);
+
+  const classes = useStyles();
+  /* eslint-disable react/jsx-no-duplicate-props */
   return (
     <TextField
       onChange={debouncedHandleChange}
@@ -39,6 +40,9 @@ export const Search = ({ setSearchString }) => {
       variant="outlined"
       inputProps={{
         autoComplete: 'off',
+      }}
+      InputProps={{
+        autoFocus: true,
       }}
     />
   );
